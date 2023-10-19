@@ -4,6 +4,7 @@ const app = Vue.createApp({
     // template: '<h2>I am the template </h2>'
     data() {
         return {
+            showBooks: true,
             title: 'Ready Player One',
             author: 'Ernest Cline',
             age: 51
@@ -12,11 +13,13 @@ const app = Vue.createApp({
     methods: {
         changeTitle(title) {
 
-            this.title = title,
-                this.author = 'Matthew McConaughy'
-
-
+            this.title = title
+            this.author = 'Matthew McConaughy'
+        },
+        toggleShowBooks() {
+            this.showBooks = !this.showBooks
         }
+
     }
 })
 
