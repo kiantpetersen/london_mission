@@ -5,12 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+      .box {
+        padding: 100px 0;
+        width: 400px;
+        text-align: center;
+        background-color: #757575;
+        margin: 20px;
+        display: inline-block;
+      }
+      img {
+        height: 100px;
+        width: 100px;
+        object-fit: cover;
+      }
+      .fav {
+        background-color: rebeccapurple;
+      }
+    </style>
   </head>
   <body>
     <h1>Hello there</h1>
     <div id="app">
+      <p>{{filteredBooks}}</p>
+      <!-- Attribute Binding -->
+      <!-- <a v-bind:href="url">Let's create</a> -->
+      <a :href="url">Let's create</a>
       <div v-if="showBooks">
-        <h2>{{title}}-{{author}} ({{age}})</h2>
+        <ul>
+          <li
+            @click="toggleFav(book)"
+            v-for="book in books"
+            v-for="book in filteredBooks"
+            :class="{fav:book.isFav}"
+          >
+            <!-- <li
+            @click="toggleFav(book)"
+            v-for="book in books"
+            v-for="book in books"
+            :class="{fav:book.isFav}"
+          > -->
+            <img :src="book.img" :alt="book.title" />
+            <h3>{{book.title}} - {{book.author}} ({{book.age}})</h3>
+          </li>
+        </ul>
       </div>
       <button v-on:click="age++">Increase Age</button>
       <button v-on:click="age--">Decrease Age</button>
@@ -21,6 +59,12 @@
       <div @click="changeTitle('The Power of Habit')">Change Title</div>
 
       <div v-show="showBooks">currently showing books</div>
+      <br />
+
+      <div class="box" @mouseover="handleEvent($event, 5)">MouseOver</div>
+      <div class="box" @mouseleave="handleEvent">MouseLeave</div>
+      <div class="box" @dblclick="handleEvent">Double click</div>
+      <div class="box" @mousemove="handleMousemove">position - {{x}} {{y}}</div>
     </div>
     <script src="app.js"></script>
   </body>
